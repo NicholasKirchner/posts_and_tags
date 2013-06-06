@@ -3,4 +3,7 @@
   <% @post.content.split("-").each do |paragraph| %>
     <p><%= paragraph %></p>
   <% end %>
+  <form method="link" action="/posts/edit/<%= @post.id %>">
+    <input type="submit" value="Edit this post">
+  </form>
 </div>

@@ -1,0 +1,14 @@
+<div class="container">
+  <h2> Create a post! </h2>
+  <form action="post" method="/posts/create">
+      <p> Enter your Title!
+        <input type="text" name="title" value="<%= @post.title if @post %>">
+      </p>
+      <p> Enter your Text!  (Start each new paragraph with a "-".)
+        <textarea name="content" rows="8" cols="60">
+          <%= @post.content if @post %>
+        </textarea>
+      </p>
+      <input type="submit" value="Create this post!">
+  </form>
+</div>
