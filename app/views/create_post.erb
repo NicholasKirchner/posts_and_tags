@@ -1,7 +1,8 @@
 <div class="container">
   <h2> <%= @post ? "Edit" : "Create" %> a post! </h2>
+  <%= @errors %>
   <form method="post" action="/posts/create">
-    <% if @post %>
+    <% if @post && @post.id %>
       <input type="hidden" name="id" value="<%= @post.id %>">
     <% end %>
     <p> Enter your Title!

@@ -8,22 +8,26 @@ get '/post/:id' do
 end
 
 get '/posts/create' do
+  @post = session.delete(:post) if session[:post]
+  @errors = session.delete(:errors) if session[:errors]
   erb :create_post
 end
 
 post '/posts/create' do
-  if params[:id]
-    post = params[:id]
-  else
-    post = Post.new(title: params[:title], content: params[:content])
-  end
+  post = params[:id] ? Post.find(params[:id]) : Post.new
   post.title = params[:title]
   post.content = params[:content]
   tags = params[:tags].split(",")
   tags = tags.map { |name| Tag.find_or_create_by_name(name: name) }
-  post.tags = tags 
-  post.save
-  redirect '/posts'
+  post.tags = tags
+  if post.valid?
+    post.save
+    redirect '/posts'
+  else
+    session[:errors] = post.errors
+    session[:post] = post
+    redirect '/posts/create'
+  end
 end
 
 get '/posts/edit/:id' do
