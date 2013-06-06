@@ -3,6 +3,12 @@
   <% @post.content.split("-").each do |paragraph| %>
     <p><%= paragraph %></p>
   <% end %>
+  Filed under tags
+  <ul>
+    <% @post.tags.each do |tag| %>
+      <li><%= tag.name %></li>
+    <% end %>
+  </ul>
   <form method="link" action="/posts/edit/<%= @post.id %>">
     <input type="submit" value="Edit this post">
   </form>

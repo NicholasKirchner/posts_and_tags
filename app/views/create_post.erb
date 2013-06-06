@@ -1,14 +1,24 @@
 <div class="container">
-  <h2> Create a post! </h2>
-  <form action="post" method="/posts/create">
-      <p> Enter your Title!
-        <input type="text" name="title" value="<%= @post.title if @post %>">
-      </p>
-      <p> Enter your Text!  (Start each new paragraph with a "-".)
-        <textarea name="content" rows="8" cols="60">
-          <%= @post.content if @post %>
-        </textarea>
-      </p>
-      <input type="submit" value="Create this post!">
+  <h2> <%= @post ? "Edit" : "Create" %> a post! </h2>
+  <form method="post" action="/posts/create">
+    <% if @post %>
+      <input type="hidden" name="id" value="<%= @post.id %>">
+    <% end %>
+    <p> Enter your Title!
+      <input type="text" name="title" value="<%= @post.title if @post %>">
+    </p>
+    <p> Enter your Text!  (Start each new paragraph with a "-".)
+      <textarea name="content" rows="8" cols="60"><%= @post.content if @post %></textarea>
+    </p>
+    <p> Input the tags you want this under.  Separate the tags by commas.
+      <input type="text" name="tags"
+             value="<%= @post.tags.map{ |tag| tag.name }.join(",") if @post %>">
+    </p>
+    <input type="submit" value="<%= @post ? "Edit" : "Create" %> this post!">
   </form>
+  <% if @post %>
+    <form class="delete" method="post" action="/posts/delete/<%= @post.id %>">
+      <input type="submit" value="Delete this post">
+    </form>
+  <% end %>
 </div>
