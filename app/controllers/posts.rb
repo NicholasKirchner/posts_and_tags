@@ -8,8 +8,6 @@ get '/post/:id' do
 end
 
 get '/posts/create' do
-  @post = session.delete(:post) if session[:post]
-  @errors = session.delete(:errors) if session[:errors]
   erb :create_post
 end
 
@@ -24,9 +22,9 @@ post '/posts/create' do
     post.save
     redirect '/posts'
   else
-    session[:errors] = post.errors
-    session[:post] = post
-    redirect '/posts/create'
+    @errors = post.errors
+    @post = post
+    erb :create_post
   end
 end
 

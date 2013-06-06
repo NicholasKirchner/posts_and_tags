@@ -1,6 +1,12 @@
 <div class="container">
-  <h2> <%= @post ? "Edit" : "Create" %> a post! </h2>
-  <%= @errors %>
+  <h2> <%= @post && @post.id ? "Edit" : "Create" %> a post! </h2>
+  <% if @errors %>
+    <ul>
+      <% @errors.each do |field,problem| %>
+        <li><%= field.to_s + " " + problem %></li>
+      <% end %>
+    </ul>
+  <% end %>
   <form method="post" action="/posts/create">
     <% if @post && @post.id %>
       <input type="hidden" name="id" value="<%= @post.id %>">
@@ -15,7 +21,8 @@
       <input type="text" name="tags"
              value="<%= @post.tags.map{ |tag| tag.name }.join(",") if @post %>">
     </p>
-    <input type="submit" value="<%= @post ? "Edit" : "Create" %> this post!">
+    <input type="submit"
+           value="<%= @post && @post.id ? "Edit" : "Create" %> this post!">
   </form>
   <% if @post %>
     <form class="delete" method="post" action="/posts/delete/<%= @post.id %>">
