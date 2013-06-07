@@ -1,9 +1,7 @@
-<div class="container">
-  <h2> List of tags </h2>
-  <p> Click a tag to view a list of posts with that tag </p>
-  <ul>
-    <% Tag.all.each do |tag| %>
-      <li><a href="/tags/<%= tag.id %>"> <%= tag.name %> </a></li>
-    <% end %>
-  </ul>
-</div>
+<h2> List of tags </h2>
+<p> Click a tag to view a list of posts with that tag </p>
+<ul class="links">
+  <% Tag.all.each do |tag| %>
+    <li class="inline"><a href="/tags/<%= tag.id %>"> <%= tag.name %> </a></li>
+  <% end %>
+</ul>

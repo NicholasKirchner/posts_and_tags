@@ -1,32 +1,20 @@
-<div class="container">
-  <h2> <%= @post && @post.id ? "Edit" : "Create" %> a post! </h2>
-  <% if @errors %>
-    <ul>
-      <% @errors.each do |field,problem| %>
-        <li><%= field.to_s + " " + problem %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <form method="post" action="/posts/create">
-    <% if @post && @post.id %>
-      <input type="hidden" name="id" value="<%= @post.id %>">
-    <% end %>
-    <p> Enter your Title!
-      <input type="text" name="title" value="<%= @post.title if @post %>">
-    </p>
-    <p> Enter your Text!  (Start each new paragraph with a "-".)
-      <textarea name="content" rows="8" cols="60"><%= @post.content if @post %></textarea>
-    </p>
-    <p> Input the tags you want this under.  Separate the tags by commas.
-      <input type="text" name="tags"
-             value="<%= @post.tags.map{ |tag| tag.name }.join(",") if @post %>">
-    </p>
-    <input type="submit"
-           value="<%= @post && @post.id ? "Edit" : "Create" %> this post!">
-  </form>
-  <% if @post %>
-    <form class="delete" method="post" action="/posts/delete/<%= @post.id %>">
-      <input type="submit" value="Delete this post">
-    </form>
-  <% end %>
-</div>
+<h2> <%= @post.action %> a post! </h2>
+<%= erb @post.errors_template, { :locals => { :errors => @post.errors } } %>
+<form method="post" action="/posts/create">
+  <%= erb @post.id_field_template, { :locals => { :post => @post }} %>
+
+  <p> Enter your Title!
+    <input type="text" name="post[title]" value="<%= @post.title %>">
+  </p>
+  <p> Enter your Text!  (Start each new paragraph with a "-".)
+    <textarea name="post[content]" rows="8" cols="60"><%= @post.content %></textarea>
+  </p>
+  <p> Input the tags you want this under.  Separate the tags by commas.
+    <input type="text" name="tags"
+    value="<%= @post.tags %>">
+  </p>
+  <input type="submit"
+  value="<%= @post.action %> this post!">
+</form>
+<%= erb @post.delete_button_template, { :locals => { :post => @post } } %>
+

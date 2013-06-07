@@ -1,8 +1,6 @@
-<div class="container">
-  <h2> Posts under the tag <%= @tag.name %> </h2>
-  <ul>
-    <% @tag.posts.each do |post| %>
-      <li><a href="posts/<%= post.id %>"> <%= post.title %> </a></li>
-    <% end %>
-  </ul>
-</div>
+<h2> Posts under the tag <%= @tag.name %> </h2>
+<ul>
+  <% @tag.posts.each do |post| %>
+    <li><a href="posts/<%= post.id %>"> <%= post.title %> </a></li>
+  <% end %>
+</ul>

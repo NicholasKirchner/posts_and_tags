@@ -1,8 +1,6 @@
-<div class="container">
-  <h2> Listing of posts </h2>
-  <ul>
-    <% Post.all.each do |post| %>
-      <li><a href="/post/<%= post.id %>"> <%= post.title %> </a></li>
-    <% end %>
-  </ul>
-</div>
+<h2> Listing of posts </h2>
+<ul class="links">
+  <% Post.all.each do |post| %>
+    <li><a href="/post/<%= post.id %>"> <%= post.title %> </a></li>
+  <% end %>
+</ul>

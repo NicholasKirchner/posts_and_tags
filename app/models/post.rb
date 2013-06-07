@@ -3,4 +3,11 @@ class Post < ActiveRecord::Base
 
   validates :title, :presence => true
   validates :content, :presence => true
+
+  def self.new_or_edited(attributes)
+    post = attributes[:id] ? Post.find(attributes[:id]) : Post.new
+    post.update_attributes(attributes)
+    post
+  end
+
 end
