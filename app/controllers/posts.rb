@@ -39,9 +39,10 @@ post '/posts/delete/:id' do
 end
 
 
-class PostPresenter
+class PostPresenter < SimpleDelegator
   def initialize(post)
     @post = post
+    __setobj__(@post)
   end
 
   def delete_button_template
@@ -68,23 +69,23 @@ class PostPresenter
     @post.persisted?
   end
 
-  def title
-    @post.title
-  end
+  # def title
+  #   @post.title
+  # end
 
-  def content
-    @post.content
-  end
+  # def content
+  #   @post.content
+  # end
 
-  def id
-    @post.id
-  end
+  # def id
+  #   @post.id
+  # end
 
-  def valid?
-    @post.valid?
-  end
+  # def valid?
+  #   @post.valid?
+  # end
 
-  def errors
-    @post.errors
-  end
+  # def errors
+  #   @post.errors
+  # end
 end

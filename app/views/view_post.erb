@@ -1,11 +1,14 @@
-<h2> <%= @post.title %> </h2>
+<h2 class="title"> <%= @post.title %> </h2>
+<div class="content">
 <% @post.content.split("-").each do |paragraph| %>
   <p><%= paragraph %></p>
 <% end %>
-Filed under tags
-<ul>
+</div>
+<div class="taglist">
+Filed under:
+<ul class="links">
   <% @post.tags.each do |tag| %>
-    <li><%= tag.name %></li>
+    <li class="inline"><a href="/tags/<%= tag.id %>"><%= tag.name %></a></li>
   <% end %>
 </ul>
 <form method="link" action="/posts/edit/<%= @post.id %>">

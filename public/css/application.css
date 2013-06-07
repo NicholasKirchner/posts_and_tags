@@ -24,10 +24,29 @@ header a {
     background-color: #ff9
 }
 
+.title {
+    font-family: sans-serif;
+}
+
+.content {
+    border-bottom: 2px solid grey;
+    line-height: 150%;
+    font-family: serif;
+}
+
+.tags {
+    
+}
+
 li.inline {
     display: inline-block;
 }
 
 a {
     text-decoration: none;
+}
+
+.error {
+  background-color: #f99;
+  color: #000;
 }
